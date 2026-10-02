@@ -4,32 +4,47 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <title>Cowen Physics</title>
-  <meta name="description" content="Cowen Physics: physics teaching videos on YouTube, plus BrainGlue, LabWizard and Seating Plan, tools for students and teachers.">
+  <meta name="description" content="Cowen Physics: physics teaching videos on YouTube, plus BrainGlue, LabWizard, Seating Plan and Scrapbook.live.">
   <meta property="og:title" content="Cowen Physics">
-  <meta property="og:description" content="Physics teaching videos and tools for students and teachers.">
+  <meta property="og:description" content="Physics teaching videos, and tools for students and teachers.">
   <meta property="og:url" content="https://cowenphysics.com/">
   <meta property="og:type" content="website">
-  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='7' fill='%232563eb'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='16' font-weight='700' fill='white' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%234f46e5'/%3E%3Ctext x='16' y='22' font-family='Arial,sans-serif' font-size='15' font-weight='700' fill='white' text-anchor='middle'%3ECP%3C/text%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
   <style>
     :root {
-      --bg: #f7f8fa;
+      --bg: #f6f7fb;
       --card: #ffffff;
-      --text: #14171f;
-      --muted: #5b6270;
-      --border: #e2e5ea;
-      --accent: #2563eb;
+      --text: #12141c;
+      --muted: #5d6475;
+      --border: #e3e6ee;
+      --grid: rgba(79, 70, 229, 0.07);
+      --glow: rgba(99, 102, 241, 0.18);
+      --shadow: 0 1px 2px rgba(16, 24, 40, 0.04), 0 4px 16px rgba(16, 24, 40, 0.05);
+      --shadow-hover: 0 2px 4px rgba(16, 24, 40, 0.05), 0 16px 32px rgba(16, 24, 40, 0.10);
+      --footer-bg: #111827;
+      --footer-text: #9ca3af;
+      --footer-strong: #e5e7eb;
+      --footer-link: #a5b4fc;
     }
     @media (prefers-color-scheme: dark) {
       :root {
-        --bg: #0f1115;
-        --card: #181b22;
-        --text: #eceef2;
-        --muted: #9aa1ad;
-        --border: #2a2f39;
-        --accent: #6b9bff;
+        --bg: #0c0e14;
+        --card: #151821;
+        --text: #eceef4;
+        --muted: #9aa1b2;
+        --border: #262b38;
+        --grid: rgba(129, 140, 248, 0.07);
+        --glow: rgba(99, 102, 241, 0.22);
+        --shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+        --shadow-hover: 0 16px 32px rgba(0, 0, 0, 0.45);
+        --footer-bg: #07080c;
       }
     }
     * { box-sizing: border-box; }
+    html { -webkit-text-size-adjust: 100%; }
     body {
       margin: 0;
       min-height: 100vh;
@@ -37,61 +52,259 @@
       flex-direction: column;
       background: var(--bg);
       color: var(--text);
-      font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+      font-family: Inter, system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
       line-height: 1.5;
+      -webkit-font-smoothing: antialiased;
     }
+
+    /* Hero */
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 88px 16px 56px;
+      text-align: center;
+    }
+    header::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(var(--grid) 1px, transparent 1px),
+        linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+      background-size: 32px 32px;
+      mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 70%);
+      -webkit-mask-image: radial-gradient(ellipse at 50% 30%, #000 20%, transparent 70%);
+    }
+    header::after {
+      content: "";
+      position: absolute;
+      top: -180px;
+      left: 50%;
+      width: 640px;
+      height: 400px;
+      transform: translateX(-50%);
+      background: radial-gradient(closest-side, var(--glow), transparent);
+      pointer-events: none;
+    }
+    .hero { position: relative; z-index: 1; max-width: 640px; margin: 0 auto; }
+    .logo {
+      display: inline-grid;
+      place-items: center;
+      width: 64px;
+      height: 64px;
+      margin-bottom: 24px;
+      border-radius: 18px;
+      background: linear-gradient(135deg, #6366f1, #4f46e5 50%, #7c3aed);
+      color: #fff;
+      box-shadow: 0 10px 30px rgba(79, 70, 229, 0.35);
+    }
+    .logo svg { width: 36px; height: 36px; }
+    h1 {
+      margin: 0 0 12px;
+      font-size: clamp(2.25rem, 7vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -0.035em;
+      line-height: 1.1;
+    }
+    .tagline { margin: 0; color: var(--muted); font-size: clamp(1rem, 2.5vw, 1.2rem); }
+
+    /* Cards */
     main {
       flex: 1;
       width: 100%;
-      max-width: 760px;
+      max-width: 880px;
       margin: 0 auto;
-      padding: 72px 16px 40px;
+      padding: 0 16px 80px;
     }
-    h1 { margin: 0 0 8px; font-size: clamp(2rem, 6vw, 2.75rem); letter-spacing: -0.02em; }
-    .tagline { margin: 0 0 40px; color: var(--muted); font-size: 1.125rem; }
     .grid { display: grid; grid-template-columns: 1fr; gap: 16px; }
-    @media (min-width: 600px) { .grid { grid-template-columns: 1fr 1fr; } }
+    @media (min-width: 640px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .card.featured { grid-column: 1 / -1; }
+    }
     .card {
-      display: block;
-      padding: 20px 22px;
+      --accent: #4f46e5;
+      position: relative;
+      display: flex;
+      gap: 16px;
+      align-items: flex-start;
+      padding: 22px;
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: 16px;
+      box-shadow: var(--shadow);
       color: inherit;
       text-decoration: none;
-      transition: border-color 0.15s, transform 0.15s;
+      transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
     }
-    .card:hover { border-color: var(--accent); transform: translateY(-2px); }
-    .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; }
-    .card h2 { margin: 0 0 6px; font-size: 1.125rem; display: flex; justify-content: space-between; }
-    .card h2::after { content: "↗"; color: var(--accent); }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: var(--shadow-hover);
+      border-color: color-mix(in srgb, var(--accent) 45%, var(--border));
+    }
+    .card:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+    .icon {
+      flex: none;
+      display: grid;
+      place-items: center;
+      width: 48px;
+      height: 48px;
+      border-radius: 12px;
+      background: color-mix(in srgb, var(--accent) 12%, transparent);
+      color: var(--accent);
+    }
+    .icon svg { width: 26px; height: 26px; }
+    .body { flex: 1; min-width: 0; }
+    .card h2 {
+      margin: 2px 0 4px;
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
     .card p { margin: 0; color: var(--muted); font-size: 0.95rem; }
-    footer { padding: 24px 16px; text-align: center; color: var(--muted); font-size: 0.875rem; }
+    .domain {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      color: var(--accent);
+    }
+    .arrow {
+      flex: none;
+      color: var(--muted);
+      transition: transform 0.2s ease, color 0.2s ease;
+    }
+    .card:hover .arrow { transform: translate(3px, -3px); color: var(--accent); }
+    .card.featured { padding: 26px; }
+    .card.featured h2 { font-size: 1.25rem; }
+
+    .youtube   { --accent: #e11d48; }
+    .brainglue { --accent: #db2777; }
+    .labwizard { --accent: #0d9488; }
+    .seating   { --accent: #4f46e5; }
+    .scrapbook { --accent: #d97706; }
+    @media (prefers-color-scheme: dark) {
+      .youtube   { --accent: #fb7185; }
+      .brainglue { --accent: #f472b6; }
+      .labwizard { --accent: #2dd4bf; }
+      .seating   { --accent: #818cf8; }
+      .scrapbook { --accent: #fbbf24; }
+    }
+
+    /* Footer */
+    footer {
+      padding: 36px 16px;
+      background: var(--footer-bg);
+      color: var(--footer-text);
+      font-size: 0.78rem;
+      line-height: 1.7;
+      text-align: center;
+    }
+    footer .brand {
+      display: block;
+      margin-bottom: 12px;
+      color: var(--footer-strong);
+      font-size: 1rem;
+      font-weight: 700;
+      letter-spacing: -0.01em;
+    }
+    footer p { margin: 0 auto 4px; max-width: 640px; }
+    footer a { color: var(--footer-link); text-decoration: none; }
+    footer a:hover { text-decoration: underline; }
+    footer .copy { margin-top: 12px; }
+
+    @media (prefers-reduced-motion: reduce) {
+      .card, .arrow { transition: none; }
+      .card:hover { transform: none; }
+    }
   </style>
 </head>
 <body>
+  <header>
+    <div class="hero">
+      <div class="logo" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round">
+          <circle cx="12" cy="12" r="1.8" fill="currentColor" stroke="none"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(60 12 12)"/>
+          <ellipse cx="12" cy="12" rx="10" ry="4" transform="rotate(120 12 12)"/>
+        </svg>
+      </div>
+      <h1>Cowen Physics</h1>
+      <p class="tagline">Physics teaching videos, and tools for students and teachers.</p>
+    </div>
+  </header>
+
   <main>
-    <h1>Cowen Physics</h1>
-    <p class="tagline">Physics teaching videos, and tools for students and teachers.</p>
     <div class="grid">
-      <a class="card" href="https://www.youtube.com/@CowenPhysics" target="_blank" rel="noopener">
-        <h2>YouTube</h2>
-        <p>Physics explainers and lessons on the CowenPhysics channel.</p>
+      <a class="card featured youtube" href="https://www.youtube.com/@CowenPhysics" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="currentColor"><path d="M21.6 7.2a2.5 2.5 0 0 0-1.76-1.77C18.28 5 12 5 12 5s-6.28 0-7.84.43A2.5 2.5 0 0 0 2.4 7.2C2 8.77 2 12 2 12s0 3.23.4 4.8a2.5 2.5 0 0 0 1.76 1.77C5.72 19 12 19 12 19s6.28 0 7.84-.43a2.5 2.5 0 0 0 1.76-1.77C22 15.23 22 12 22 12s0-3.23-.4-4.8ZM10 15V9l5.2 3L10 15Z"/></svg>
+        </span>
+        <span class="body">
+          <h2>CowenPhysics on YouTube</h2>
+          <p>Physics explainers and lessons on the CowenPhysics channel.</p>
+          <span class="domain">youtube.com/@CowenPhysics</span>
+        </span>
+        <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
-      <a class="card" href="https://www.brainglue.app/" target="_blank" rel="noopener">
-        <h2>BrainGlue</h2>
-        <p>AI-powered revision quizzes for GCSE and A Level students.</p>
+
+      <a class="card brainglue" href="https://www.brainglue.app/" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3A2.5 2.5 0 0 0 7 5.5v.1A3 3 0 0 0 4.5 10a3 3 0 0 0 .6 4.8A3 3 0 0 0 9 19.5a2.5 2.5 0 0 0 3 1.5V4.5A2.5 2.5 0 0 0 9.5 3Z"/><path d="M14.5 3A2.5 2.5 0 0 1 17 5.5v.1A3 3 0 0 1 19.5 10a3 3 0 0 1-.6 4.8 3 3 0 0 1-3.9 4.7 2.5 2.5 0 0 1-3 1.5"/></svg>
+        </span>
+        <span class="body">
+          <h2>BrainGlue</h2>
+          <p>AI-powered revision quizzes for GCSE and A Level students.</p>
+          <span class="domain">brainglue.app</span>
+        </span>
+        <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
-      <a class="card" href="https://www.labwizard.app" target="_blank" rel="noopener">
-        <h2>LabWizard</h2>
-        <p>Simulations of the A-Level Physics required practicals.</p>
+
+      <a class="card labwizard" href="https://www.labwizard.app" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 3h6M10 3v6.5L4.6 18.4A1.7 1.7 0 0 0 6.1 21h11.8a1.7 1.7 0 0 0 1.5-2.6L14 9.5V3"/><path d="M7.5 15h9"/></svg>
+        </span>
+        <span class="body">
+          <h2>LabWizard</h2>
+          <p>Simulations of the A-Level Physics required practicals.</p>
+          <span class="domain">labwizard.app</span>
+        </span>
+        <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
-      <a class="card" href="https://www.seatingplan.com" target="_blank" rel="noopener">
-        <h2>Seating Plan</h2>
-        <p>Classroom seating plan generator for teachers.</p>
+
+      <a class="card seating" href="https://www.seatingplan.com" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+        </span>
+        <span class="body">
+          <h2>Seating Plan</h2>
+          <p>Classroom seating plan generator for teachers.</p>
+          <span class="domain">seatingplan.com</span>
+        </span>
+        <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
+      </a>
+
+      <a class="card scrapbook" href="https://scrapbook.live" target="_blank" rel="noopener">
+        <span class="icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v8a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2V8Z"/><path d="M15 6v12" stroke-dasharray="2 2"/><path d="M7 10h5M7 14h3"/></svg>
+        </span>
+        <span class="body">
+          <h2>Scrapbook.live</h2>
+          <p>Keep a nostalgic record of every gig you've ever been to.</p>
+          <span class="domain">scrapbook.live</span>
+        </span>
+        <svg class="arrow" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M7 17 17 7M8 7h9v9"/></svg>
       </a>
     </div>
   </main>
-  <footer>© 2026 Cowen Physics</footer>
+
+  <footer>
+    <span class="brand">Cowen Physics</span>
+    <p>Cowen Physics is a trading name of <a href="https://www.seatingplan.com" target="_blank" rel="noopener">Mega Seating Plan Ltd.</a></p>
+    <p>Mega Seating Plan Ltd is registered as a company in England and Wales (registration number 10358390): 86-90 Paul Street, London, EC2A 4NE, United Kingdom.</p>
+    <p>Registered for VAT in the United Kingdom (GB394723269) and in the European Union (SE516413965001).</p>
+    <p>Registered with the Information Commissioner's Office (ZA331933).</p>
+    <p class="copy">© Cowen Physics 2026</p>
+  </footer>
 </body>
 </html>
